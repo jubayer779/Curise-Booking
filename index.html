@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curise Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container" >
+    <!--Header and Menu Section-->
+    <header class="">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content my-5 row">
+
+        <div class="booking-content pe-5 col-lg-6">
+            <h1>Cruise Queen</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.</p>
+        </div>
+
+
+        <div class="booking-form col-lg-6">
+            <h3>Book Ocean Time</h3>
+            <div class="input-group">
+                <label for="">Traveling From</label>
+                <input id="traveling-from" class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Traveling To</label>
+                <input id="traveling-to" class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input id="departure" class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input  id="return" class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($150)</label>
+                    <input id="firstClass-count" class="inp-style inp-width" disabled type="number"
+                        value="0" name="">
+                </div>
+                <div class="plus-minus-btn mt-sm-4">
+                    <button onclick="handleTicketCount('firstClass', true)" class="btn btn-info">+</button>
+                    <button onclick="handleTicketCount('firstClass', false)" class="btn btn-info">-</button>
+                </div>
+            </div>
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy ($100)</label>
+                    <input disabled id="economy-count" class="inp-style inp-width" type="number"
+                        value="0" name="">
+                </div>
+                <div class="plus-minus-btn mt-sm-4">
+                    <button onclick="handleTicketCount('economy', true)" class="btn btn-info">+</button>
+                    <button onclick="handleTicketCount('economy', false)" class="btn btn-info">-</button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="subtotal-amount">0</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="vat-amount">0</span></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="total-amount">0</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Button trigger modal -->
+            <button onclick="bookNow()" type="button" class="btn-style" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Book Now
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel">Book Ocean Time</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Traveling <span id="display-from" class="fw-bold text-capitalize">Dhaka</span> To <span id="display-to" class="fw-bold text-capitalize">Barisal</span></h5>
+                            <p>The day to go  <strong id="display-departure-date" class="">5/1/2021</strong>, and the day of return  <strong id="display-return-date">10/1/2021</strong>.</p>
+                            <div class="d-flex justify-content-between">
+                                <h5>Quality</h5>
+                                <h5>Ticket</h5>
+                                <h5>Price</h5>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>FirstClass</h6>
+                                <h6 id="firsts-class">0</h6>
+                                <h6>$<span id="fist-class-price">0</span></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>Economy</h6>
+                                <h6 id="economy-class">0</h6>
+                                <h6>$<span id="economy-class-price">0</span></h6>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <h6>Sub Total</h6>
+                                <h6>$<span id="subtotal-price">0</span></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>Vat(10%)</h6>
+                                
+                                <h6>$<span id="vat">0</span></h6>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>Total</h6>
+                                <h6 id="total-count">0</h6>
+                                <h6>$<span id="total-price">0</span></h6>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>
+
+// count handler
+function handleTicketCount(item, isIncrease) {
+    const ticketCount = getStringToNum(item);
+    let ticketNewCount = ticketCount;
+    console.log(typeof (ticketCount));
+    if (isIncrease) {
+        ticketNewCount = ticketCount + 1;
+    } else {
+        if (ticketNewCount > 0) {
+            ticketNewCount = ticketCount - 1;
+        }
+    }
+    getElementId(item + '-count').value = ticketNewCount;//display ticket count
+
+    calculateAmount(); 
+}
+
+//calculate all type 
+function calculateAmount() {
+    const firstClassAmount = getTotalAmount('firstClass');
+    const economyAmount = getTotalAmount('economy');
+
+    const subTotalAmount = firstClassAmount + economyAmount;
+    getElementId('subtotal-amount').innerText = subTotalAmount;
+
+    const vatAmount = subTotalAmount * 0.1;
+    getElementId('vat-amount').innerText = vatAmount;
+
+    const totalAmount = subTotalAmount + vatAmount;
+    getElementId('total-amount').innerText = totalAmount;
+}
+
+
+// total amount
+function getTotalAmount(item) {
+    const ticketCount = getStringToNum(item);
+    let ticketAmount = 0;
+    if (item == 'firstClass') {
+        ticketAmount = ticketCount * 150;
+    } else {
+        ticketAmount = ticketCount * 100;
+    }
+    return ticketAmount;
+}
+
+
+// number from string 
+function getStringToNum(string) {
+    let inputId = getElementId(string + '-count');
+    return parseInt(inputId.value);
+}
+
+function bookNow() {
+    //  traveling place
+    getElementId('display-from').innerText = getElementId('traveling-from').value;
+    getElementId('display-to').innerText = getElementId('traveling-to').value;
+
+    //  traveling date
+    getElementId('display-departure-date').innerText = getElementId('departure').value;
+    getElementId('display-return-date').innerText = getElementId('return').value;
+
+    // first class information
+    getElementId('firsts-class').innerText = getElementId('firstClass-count').value
+    getElementId('fist-class-price').innerText = getElementId('firstClass-count').value * 150;
+
+    //  economy information
+    getElementId('economy-class').innerText = getElementId('economy-count').value;
+    getElementId('economy-class-price').innerText = getElementId('economy-count').value * 100;
+
+    //  subtotal information
+    getElementId('subtotal-price').innerText = getElementId('subtotal-amount').innerText;
+
+    //  vat information
+    getElementId('vat').innerText = getElementId('vat-amount').innerText;
+
+    //  total information
+    getElementId('total-count').innerText = parseInt(getElementId('firstClass-count').value) + parseInt(getElementId('economy-count').value);
+    getElementId('total-price').innerText = getElementId('total-amount').innerText;
+}
+
+// get element id 
+function getElementId(id) {
+    return document.getElementById(id);
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Thank You-->
+</body>
+
+</html>
